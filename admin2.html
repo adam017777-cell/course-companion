@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<title>Smart Course Companion - Course Adder (Admin)</title>
+<link rel="stylesheet" href="admin2.css">
+</head>
+
+<div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="/admin1">Dashboard</a>
+            <a href="admin2.html">Course Adder</a>
+            <a href="/admin3">Usage Stats</a>
+            <a href="AccountDetailsIn.html">Logout</a>
+        </div>
+</div>
+
+<div class="main">
+
+  <h1>Course Adder</h1>
+
+  <!--Holding all the course information-->
+  <form action="/addcourse" method="POST" id="courseForm">
+
+    <h3>Course Information</h3>
+
+    <!--Course code input-->
+    <label>Course Code</label><br>
+    <input name="code" type="text" id="courseCode"><br><br>
+
+    <!--Course name input-->
+    <label>Course Name</label><br>
+    <input name="name" type="text" id="courseName"><br><br>
+
+    <!--Instructor name input-->
+    <label>Instructor</label><br>
+    <input name="instructor" type="text" id="courseInstructor"><br><br>
+
+    <!--Term input-->
+    <label>Term</label><br>
+    <input name="term" type="text" id="courseTerm"><br><br>
+
+    <!--Save button-->
+    <button type="submit" id="saveBtn">Save</button>
+
+    <!--Reset button-->
+    <button type="button" id="resetBtn">Reset</button>
+
+  </form>
+</div>
+
+</body>
+</html>

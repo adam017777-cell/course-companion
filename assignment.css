@@ -1,0 +1,102 @@
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background-color: #121212;
+    color: #e3e3e3;
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1000px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: rgb(126, 126, 218);
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.navbar h2 {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+}
+
+.navbar-link a {
+    color: #5c5c5c;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.navbar-link a:hover {
+    color: #e3e3e3; 
+}
+
+.nav a {
+  color: #5c5c5c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+.card {
+    background-color: #1e1e1e;
+    border: 1px solid #333;
+    padding: 20px;
+    border-radius: 4px;
+    margin-bottom: 20px;
+}
+
+.assignmentform .formgroup {
+    margin-bottom: 15px;
+}
+
+input, select {
+    background-color: #2d2d2d;
+    color: white;
+    border: 1px solid #444;
+    padding: 8px;
+    border-radius: 4px;
+    width: 100%;
+    max-width: 400px;
+    margin-top: 5px;
+}
+
+button {
+    background-color: rgb(126, 126, 218);
+    color: white;
+    border: none;
+    padding: 8px 15px;
+    border-radius: 4px;
+    cursor: pointer;
+}
+
+button[disabled] {
+    background-color: #444;
+    color: #888;
+    cursor: not-allowed;
+}
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+th { background-color: #2d2d2d; }
+

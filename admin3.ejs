@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Course Companion - Usage Stats (Admin)</title>
+  <link rel="stylesheet" href="admin3.css">
+</head>
+
+<body onload="initStats()">
+
+  <div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="/admin1">Dashboard</a>
+            <a href="admin2.html">Course Adder</a>
+            <a href="/admin3">Usage Stats</a>
+            <a href="AccountDetailsIn.html">Logout</a>
+        </div>
+  </div>
+
+  <!--Main content-->
+  <div class="main">
+
+    <!--The Top header-->
+    <div class="topbar">
+      <div class="titleWrap">
+        <h1>Usage Statistics • <%= name %></h1>
+        <p>Activity per course.</p>
+      </div>
+    </div>
+
+    <!--Stats cards appear-->
+    <div class="statGrid" id="statsContainer">
+       <% sample.forEach(function(data) { 
+        let counter = 0; %>
+        <div class='card'>
+            <h2><%= data.courseId %>  —  <%= data.title %></h2>
+            <h3><%= data.term %></h3>
+            <span>Currently Enrolled:</span>
+             <% sample1.forEach(function(data1) {
+                if (data1.course == data.courseId && data1.assignment == "empty")  { %>
+                <p><%= data1.username %><p>
+                  <% counter++; %>
+                <% } %>
+              <% }) %>
+              <p style="font-weight: bold;">Enrolled: <%= counter %></p>
+        </div>
+            <% }) %>
+    </div>
+
+  </div>
+  
+</body>
+</html>

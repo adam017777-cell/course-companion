@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Page - Smart Course Companion</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <link rel="stylesheet" href="student.css">
+</head>
+<body>
+    <div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="/student-frontend">Dashboard</a>
+            <a href="AccountDetails.html">Logout</a>
+        </div>
+    </div>
+    <div class="main">
+        <h1>My Courses</h1>
+        <div class="course">
+            <div class="courseheader">
+                <div class="coursetitle">
+                    <h2><%= course %></h2>
+                </div>
+            </div>
+             <% let counter = 0;
+                    let done = 0;
+                    sample1.forEach(function(data) {  %>
+                    <% counter++; %>
+                        <% sample.forEach(function(data1) {
+                                if (data1.assignment == data.name && data1.assignment !== "empty")  { %>
+                                <% done++; %>
+                                <% } %>
+                        <% }) %>
+            <% }) %>
+            <% let progress = (done / counter)*100; %>
+            <div class="visualsrow">
+                <div class="progress-section">
+                    <div class="progresslabel">
+                        <span>Course Completion</span>
+                        <span id="progtext"><%= Math.round(progress) %>%</span>
+                    </div>
+                    <div class="progresscontainer" >
+                        <div class="progressbar" style="max-width:<%= progress %>%">
+                        </div>
+                    </div>
+                    <br><br>
+                    <span id="progtext">You have completed <%= done %> out of <%= counter %> assignments</span>
+                </div>
+
+                <div class="chartsection">
+                    <canvas id="chartcourse"></canvas>
+                </div>
+            </div>
+
+            <h3>Assessments</h3>
+            <table id="tb">
+                <thead>
+                    <tr>
+                        <th>Assessment</th>
+                        <th>DueDate</th>
+                        <th>Status</th>
+                        <th>Grade</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(sample.length > 0)  {
+                    sample.forEach(function(data) {
+                        if (data.assignment == "empty")
+                         return;
+                    %>
+                    <tr>
+                        <td class="names"><%= data.assignment %></td>
+                        <td><%= data.dueDate %></td>
+                        <td><% if(data.status == 1) { %>
+                               <p><%= "Completed" %></p>
+                               <% } else { %>
+                                <p><%= "Pending" %></p>
+                                <% } %>
+                        </td>
+                        <td class="grades"><%= data.grade %></td>
+                    </tr>
+                    <% })}; %>
+                </tbody>
+            </table>
+            <br><br>
+        </div>
+    </div>
+   
+</body>
+
+<script>
+
+    let myChart = null;
+
+        function initCharts() {
+            const gradeData = Array.from(document.getElementsByClassName("grades")).map(el => Number(el.innerHTML.trim()));
+            const nameData = Array.from(document.getElementsByClassName("names")).map(el => String(el.innerHTML.trim()));
+
+            const ctx1 = document.getElementById('chartcourse').getContext('2d');
+            new Chart(ctx1, {
+                type: 'bar', 
+                data: {
+                    labels: nameData, 
+                    datasets: [{
+                        label: 'Grade (# Of Points)',
+                        data: gradeData, 
+                        backgroundColor: 'rgba(54, 162, 235, 0.6)',
+                        borderColor: 'rgba(54, 162, 235, 1)',
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    responsive: true,
+                    maintainAspectRatio: false,
+                    scales: {
+                        y: { beginAtZero: true, max: 100, display: false }
+                    },
+                    plugins: {
+                        legend: { display: false },
+                        title: { display: true, text: 'Grades' }
+                    }
+                }
+            });
+        }
+
+        window.onload = function() {
+            initCharts();
+        };
+    </script>
+</html>

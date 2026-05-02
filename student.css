@@ -1,0 +1,113 @@
+body {
+    font-family: 'DM Sans', Arial, sans-serif;
+    background-color: #121212;
+    color: #e3e3e3;
+    padding: 0;
+    margin: 0;
+}
+
+.main {
+    margin: 20px auto;
+    padding: 20px;
+    max-width: 1000px;
+}
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: rgb(126, 126, 218);
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.navbar h2 {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+}
+
+.navbar-link a {
+    color: #5c5c5c;
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.navbar-link a:hover {
+    color: #e3e3e3; 
+}
+
+.nav a {
+  color: #5c5c5c;
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+.course {
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    padding: 20px;
+    border: 1px solid #333;
+    margin-bottom: 20px;
+}
+
+.courseheader {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid #333;
+    padding-bottom: 10px;
+    margin-bottom: 15px;
+}
+
+.visualsrow {
+    display: flex;
+    gap: 20px;
+    flex-wrap: wrap;
+}
+
+.progress-section {
+    flex: 1;
+    min-width: 250px;
+}
+
+.progresslabel {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 5px;
+}
+
+.progresscontainer {
+    height: 15px;
+    background-color: #333;
+    border-radius: 4px;
+    width: 100%;
+    overflow: hidden;
+}
+
+.progressbar {
+    background-color: #3b82f6; /* simple blue */
+    height: 100%;
+    border-radius: 4px;
+    max-width: 100%;
+}
+
+
+table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-top: 15px;
+}
+
+th, td {
+    text-align: left;
+    padding: 10px;
+    border: 1px solid #333;
+}
+
+th { background-color: #2d2d2d; }

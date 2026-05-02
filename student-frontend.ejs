@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Student page for the project
+    -->
+    <title>Student Section | Smart Course Companion</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- If this file is moved, just update this path -->
+    <link rel="stylesheet" href="student-style.css" />
+  </head>
+
+  <body>
+    <div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="#dashboard">Dashboard</a>
+            <a href="#add-course">Add Course</a>
+            <a href="AccountDetails.html">Logout</a>
+        </div>
+    </div>
+
+    <main class="main">
+    <section id="courses" class="page-section">
+        <div class="page-head">
+          <h1>Dashboard</h1>
+          <p>Welcome back, <span style="font-weight: bolder;"><%= name %></span>. Here’s your overview.</p>
+        </div>
+        <div class="cards">
+        <% if(sample1.length > 0)  {
+        sample1.forEach(function(data) {
+        %>
+            <% if (data.status == 1 && data.assignment === "empty") { %> 
+
+            <form action="/addGrades" method="POST">
+            <div class="card" id="card1">
+            <h2><%= data.course %></h2>
+            <input type="hidden" name="code" value="<%= data.course %>">
+            <button type="submit" class="btn btn-primary btn-sm">Add Grades</button>
+            </form>
+            <br><br>
+            <form action="/student" method="POST">
+              <input type="hidden" name="courseN" value="<%= data.course %>">
+              <button class="btn btn-ghost btn-sm btn-new" type="submit">View Progress</button>
+            </form>
+            <br>
+            <form action="/unenrollCourse" method="POST">
+              <input type="hidden" name="courseR" value="<%= data.course %>">
+              <button class="btn btn-ghost btn-danger" type="submit">Remove</button>
+            </form>
+          </div>
+            <% } %>
+          </ul>
+          <% })}; %>
+        </div>
+      </section>
+          <br>
+          <br>
+
+        <!-- Very small table of upcoming assessments (no js) -->
+        <section class="dashboard-section">
+          <h2>Upcoming assessments</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Course</th>
+                  <th>Assessment</th>
+                  <th>Due date</th>
+                </tr>
+              </thead>
+              <tbody>
+                 <% sample1.forEach(function(data) { %>
+                 <% let date = new Date(data.dueDate).toLocaleDateString();  %>
+                 <% let today = new Date(); %>
+                      <% if (data.assignment !== "empty" && data.dueDate > today) {  %> 
+                          <tr>
+                            <td><%= data.course %></td>
+                            <td><%= data.assignment %></td>
+                            <td><%= date %></td>
+                          </tr>
+                      <% } %>
+                 <% }); %>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      <!--
+        
+        3) ADD COURSE PAGE
+        
+        Lets the student pick from available courses.
+        Right now it is just a static list with "Enroll" buttons.
+        
+      -->
+      <section id="add-course" class="page-section">
+        <div class="page-head">
+          <h1>Add course</h1>
+          <p>Enroll in an available course.</p>
+          <!-- Go back up to the My Courses section -->
+        </div>
+
+        <div class="card">
+           
+        <% if(sample.length > 0)  {
+        sample.forEach(function(data) { %>
+          <ul class="list-unstyled">
+            <!-- Available course #1 -->
+            <form action="/enrollCourse" method="POST">
+            <li class="list-item-with-action">
+              <div>
+                <strong><span id="course"><%= data.courseId %></span> — <%= data.title %></strong>
+                <span class="meta"><%= data.term %> · <%= data.instructor %></span>
+              </div>
+              <input name="course" type="hidden" id="cid" value="<%= data.courseId %>">
+              <button type="submit" class="btn btn-primary btn-sm">Enroll</button>
+            </li>
+            </form>
+          </ul>
+          <% })}; %>
+        </div>
+      </section>
+
+      
+    </main>
+
+    <!-- Simple footer, same as the main project -->
+    <footer class="site-footer">
+      <p>Smart Course Companion - Concordia University</p>
+    </footer>
+  </body>
+</html>
+

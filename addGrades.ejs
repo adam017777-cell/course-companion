@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+
+<html lang="en" data-theme="dark">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <!--
+      Student page for the project
+    -->
+    <title>Student Section | Smart Course Companion</title>
+
+    <!-- fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <!-- If this file is moved, just update this path -->
+    <link rel="stylesheet" href="student-style.css" />
+  </head>
+
+  <body>
+    
+    <main class="main">
+    <a href="/student-frontend" class="btn btn-ghost">← Back to courses</a>
+    <br><br>
+      <section id="course-detail" class="page-section">
+        <div class="page-head">
+        </div>
+
+        <section class="card">
+          <h2>Assessments</h2>
+          <div class="table-wrap">
+            <table class="table">
+              <thead>
+                <tr>
+                  <th>Title</th>
+                  <th>DueDate</th>
+                  <th>Out Of</th>
+                  <th>Grade</th>
+                </tr>
+              </thead>
+              <tbody>
+                <% if(sample.length > 0)  {
+                sample.forEach(function(data) {
+                  const date = new Date(data.dueDate).toLocaleDateString();
+                %>
+                <form action="/saveAssignment" method="POST" class="grade-form inline-form">
+                <tr>
+                <td><%= data.name %></td>
+                <td><%= date %></td>
+                <td><%= data.weight %></td>
+                <td>
+                <input type="hidden" name="assignment" value="<%= data.name %>">
+                <input type="hidden" name="duedate" value="<%= date %>">
+                <input type="hidden" name="courseID" value="<%= data.CourseId %>">
+                <input
+                        name="newGrade"
+                        type="number"
+                        placeholder="Earned (Out of <%= data.weight %>)"
+                        min="0"
+                        max="<%= data.weight %>"
+                        class="input-sm"
+                      />
+                </label>
+                <button type="submit" class="btn btn-primary btn-sm">
+                        Save and/or Mark Complete
+                </button>
+                </tr>
+                </form>
+                <% })}; %>
+              </tbody>
+            </table>
+          </div>
+        </section>
+      </section>
+
+      
+    </main>
+
+    <!-- Simple footer, same as the main project -->
+    <footer class="site-footer">
+      <p>Smart Course Companion. Concordia University.</p>
+    </footer>
+  </body>
+</html>
+

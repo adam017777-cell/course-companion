@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Smart Course Companion - Admin</title>
+  <link rel="stylesheet" href="admin1.css">
+</head>
+
+<body onload="init()">
+  <div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="admin1">Dashboard</a>
+            <a href="admin2.html">Course Adder</a>
+            <a href="/admin3">Usage Stats</a>
+            <a href="AccountDetailsIn.html">Logout</a>
+        </div>
+    </div>
+
+  <!--Main content-->
+  <div class="main">
+    <h1>Admin Dashboard</h1>
+    <div class="card">
+
+      <!--Title and button row-->
+      <div style="display:flex; align-items:center; justify-content:space-between; gap:12px; flex-wrap:wrap;">
+        <h3 style="margin:0;">Manage Courses</h3>
+
+        <!--Button for creating new course-->
+        <button onclick="goToCreateCourse()">Create New Course</button>
+      </div>
+      <!--Creating the table-->
+      <table>
+          <tr>
+            <!--Column headers for the table-->
+            <th>Code</th>
+            <th>Name</th>
+            <th>Instructor</th>
+            <th>Term</th>
+            <th>Status</th>
+            <th>Action</th>
+            <th>Edit</th>
+            <th>Delete</th>
+          </tr>
+          
+        <% if(sample.length > 0)  {
+        sample.forEach(function(data) {
+        %>
+        <tr>
+          <td><%= data.courseId %></td>
+          <td><%= data.title %></td>
+          <td><%= data.instructor %></td>
+          <td><%= data.term %></td>
+          <td><% if (data.enable == '1') {%>
+                      <p><%= "Enabled" %></p> 
+              <% }   else  {%>
+                        <p><%= "Disabled" %></p>
+              <% } %>
+          </td>
+          <td><% if (data.enable == '1') {%>
+                       <form action="/disableCourse" method="POST"><input type="hidden" name="codecourse" value="<%= data.courseId %>"><button type="submit">Disable</button></form>
+              <% }   else  {%>
+                        <form action="/enableCourse" method="POST"><input type="hidden" name="coursecode" value="<%= data.courseId %>"><button style="background-color: lightgreen;" type="submit">Enable</button></form>
+              <% } %>
+          </td>
+          <td><form action="/assignment" method="POST"><input type="hidden" name="newCode" value="<%= data.courseId %>"><button type="submit">Edit</button></form></td>
+          <td><form action="/deleteCourse" method="POST"><input type="hidden" name="courseid" value="<%= data.courseId %>"> <button style="background-color: darkred;" type="submit">Delete</button></form></td>
+        </tr>
+        <% })}; %>
+    </div>
+  </div>
+  
+</body>
+</html>

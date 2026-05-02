@@ -1,0 +1,503 @@
+/*/* Student styles for Smart Course Companion
+   This CSS file is only used by student-frontend.html
+   and covers the student pages (dashboard, courses, add course, progress).
+   I kept things grouped with comments so it's easier to find stuff.
+*/
+
+/* -----------------------------
+   COLOR VARIABLES + BASE TOKENS
+   These are like "settings" used everywhere below.
+   If you change a color here, it updates the whole page.
+------------------------------*/
+:root {
+  --bg: #f5f2ee;
+  --surface: #ffffff;
+  --text: #1a1a1a;
+  --text-muted: #5c5c5c;
+  --accent: rgb(126, 126, 218);
+  --accent-hover: rgb(126, 126, 218);
+  --border: #e0ddd8;
+  --error: #b91c1c;
+  --success: rgb(126, 126, 218);
+  --warn: #a16207;
+  --radius: 10px;
+  --font: 'DM Sans', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  --shadow: 0 2px 12px rgba(0,0,0,0.06);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.08);
+}
+
+/* Dark mode values (the HTML tag is set to data-theme="dark" in student-frontend.html) */
+[data-theme="dark"] {
+  --bg: #1a1a1a;
+  --surface: #252525;
+  --text: #f0f0f0;
+  --text-muted: #a0a0a0;
+  --border: #3a3a3a;
+  --shadow: 0 2px 12px rgba(0,0,0,0.3);
+  --shadow-hover: 0 4px 20px rgba(0,0,0,0.4);
+}
+
+/* Basic reset so padding/borders don't act weird */
+* {
+  box-sizing: border-box;
+}
+
+/* Overall page layout: full-height column with header, main content and footer */
+body {
+  margin: 0;
+  min-height: 100vh;
+  font-family: var(--font);
+  font-size: 16px;
+  line-height: 1.5;
+  color: var(--text);
+  background: var(--bg);
+  display: flex;
+  flex-direction: column;
+}
+
+
+.navbar {
+    display: flex;
+    align-items: center;
+    padding: 15px 20px;
+    background-color: rgb(126, 126, 218);
+    justify-content: space-between;
+    border-bottom: 1px solid #333;
+}
+
+.navbar h2 {
+    color: white;
+    margin: 0;
+    font-size: 20px;
+}
+
+.navbar-link a {
+    color: var(--text-muted);
+    text-decoration: none;
+    margin-left: 20px;
+    font-weight: bold;
+}
+
+.navbar-link a:hover {
+    color: #e3e3e3; 
+}
+
+.nav a {
+  color: var(--text-muted);
+  text-decoration: none;
+  font-weight: 500;
+}
+
+.nav a:hover {
+  color: white;
+}
+
+/* Container for the fake logged-in student name + logout button */
+.user-menu {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+}
+
+.user-name {
+  font-size: 0.9rem;
+  color: var(--text-muted);
+}
+
+/* Main content area that holds all sections (dashboard, courses, etc.) */
+.main {
+  flex: 1;
+  padding: 1.5rem;
+  max-width: 1200px;
+  width: 100%;
+  margin: 0 auto;
+}
+
+/* Title + subtitle area at the top of each "page" section */
+.page-head {
+  margin-bottom: 1.5rem;
+}
+
+.page-head h1 {
+  margin: 0 0 0.25rem 0;
+  font-size: 1.75rem;
+}
+
+.page-head p {
+  margin: 0 0 0.75rem 0;
+  color: var(--text-muted);
+}
+
+.back-link {
+  display: inline-block;
+  margin-bottom: 0.5rem;
+  color: var(--text-muted);
+  text-decoration: none;
+  font-size: 0.9rem;
+}
+
+.back-link:hover {
+  color: var(--accent);
+}
+
+/* Buttons */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0.5rem 1rem;
+  font-family: var(--font);
+  font-size: 0.9rem;
+  font-weight: 600;
+  border-radius: var(--radius);
+  border: none;
+  cursor: pointer;
+  text-decoration: none;
+  transition: background 0.15s, color 0.15s;
+}
+
+.btn-primary {
+  background: var(--accent);
+  color: #fff;
+}
+
+.btn-primary:hover {
+  background: var(--accent-hover);
+  color: var(--text-muted);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-muted);
+  border: 1px solid var(--border);
+}
+
+.btn-ghost:hover {
+  background: var(--border);
+  color: var(--text);
+}
+
+.btn-sm {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+}
+
+.btn-danger:hover {
+  color: var(--error);
+  border-color: var(--error);
+}
+
+/* Forms (used in grade form + add course buttons) */
+label {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.25rem;
+  font-size: 0.9rem;
+}
+
+input[type="number"] {
+  width: 100%;
+  max-width: 400px;
+  padding: 0.5rem 0.75rem;
+  font-family: var(--font);
+  font-size: 1rem;
+  border: 1px solid var(--border);
+  border-radius: var(--radius);
+  background: var(--surface);
+  color: var(--text);
+  margin-bottom: 1rem;
+}
+
+.input-sm {
+  max-width: 80px;
+  width: 80px;
+  display: inline-block;
+  margin: 0 0.25rem 0 0;
+}
+
+.checkbox-inline {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  margin-bottom: 0;
+  font-weight: normal;
+}
+
+.inline-form {
+  display: inline;
+}
+
+.inline-form .btn,
+.inline-form input {
+  margin: 0 0.25rem 0 0;
+}
+
+/* Cards and layout */
+.card {
+  background: var(--surface);
+  border-radius: var(--radius);
+  padding: 1.25rem;
+  margin-bottom: 1.25rem;
+  box-shadow: var(--shadow);
+  border: 1px solid var(--border);
+}
+
+.cards {
+  display: flex;
+  gap: 25px;
+}
+
+#card1  {
+  width: 200px;
+  flex: 1;
+}
+
+.card h2 {
+  margin: 0 0 1rem 0;
+  font-size: 1.15rem;
+}
+
+.card h3 {
+  margin: 0 0 0.35rem 0;
+  font-size: 1.1rem;
+}
+
+.card-badge {
+  display: inline-block;
+  font-family: var(--font-mono);
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--accent);
+  margin-bottom: 0.35rem;
+}
+
+.card-link {
+  text-decoration: none;
+  color: inherit;
+  display: block;
+  transition: box-shadow 0.2s, transform 0.2s;
+}
+
+.card-link:hover {
+  box-shadow: var(--shadow-hover);
+  transform: translateY(-2px);
+}
+
+.card-link h3 {
+  color: var(--text);
+}
+
+.card .meta,
+.card-link .meta {
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  margin: 0 0 0.25rem 0;
+}
+
+.course-avg {
+  margin: 0.35rem 0 0 0;
+  font-size: 0.9rem;
+}
+
+.course-avg.big {
+  font-size: 1.1rem;
+  margin-top: 0.5rem;
+}
+
+.muted {
+  color: var(--text-muted);
+}
+
+.card-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 0.5rem;
+  flex-wrap: wrap;
+}
+
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1rem;
+}
+
+/* Tables for assessments + upcoming section */
+.table-wrap {
+  overflow-x: auto;
+  margin-top: 0.5rem;
+}
+
+.table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+}
+
+.table th,
+.table td {
+  padding: 0.6rem 0.75rem;
+  text-align: left;
+  border-bottom: 1px solid var(--border);
+}
+
+.table th {
+  font-weight: 600;
+  color: var(--text-muted);
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+.grade-form {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.35rem;
+}
+
+/* Badges for types + statuses */
+.badge {
+  display: inline-block;
+  padding: 0.2rem 0.5rem;
+  font-size: 0.75rem;
+  font-weight: 600;
+  border-radius: 6px;
+  background: var(--border);
+  color: var(--text);
+}
+
+.badge-success {
+  background: #dcfce7;
+  color: var(--success);
+}
+
+[data-theme="dark"] .badge-success {
+  background: rgba(21, 128, 61, 0.3);
+}
+
+.badge-warn {
+  background: #fef9c3;
+  color: var(--warn);
+}
+
+[data-theme="dark"] .badge-warn {
+  background: rgba(161, 98, 7, 0.3);
+}
+
+.badge-default {
+  background: var(--border);
+}
+
+/* List for "available courses" + progress details */
+.list-unstyled {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.list-item-with-action {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.75rem 0;
+  border-bottom: 1px solid var(--border);
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.list-item-with-action:last-child {
+  border-bottom: none;
+}
+
+.list-item-with-action .meta {
+  display: block;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+}
+
+/* Dashboard + progress layout */
+.dashboard-section {
+  margin-bottom: 2rem;
+}
+
+.dashboard-section h2 {
+  font-size: 1.1rem;
+  margin: 0 0 0.75rem 0;
+  color: var(--text-muted);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 2rem;
+  color: var(--text-muted);
+}
+
+.empty-state .btn {
+  margin-top: 1rem;
+}
+
+.progress-card {
+  margin-bottom: 1.5rem;
+}
+
+.progress-label {
+  margin: 0.25rem 0;
+  font-size: 0.9rem;
+}
+
+.progress-details {
+  margin-top: 0.75rem;
+  font-size: 0.9rem;
+}
+
+.progress-details summary {
+  cursor: pointer;
+  color: var(--text-muted);
+}
+
+.progress-list {
+  margin: 0.5rem 0 0 1rem;
+  padding: 0;
+}
+
+.gpa-estimate {
+  font-size: 0.95rem;
+  margin-top: 0.25rem;
+}
+
+/* Footer */
+.site-footer {
+  text-align: center;
+  padding: 1rem;
+  font-size: 0.85rem;
+  color: var(--text-muted);
+  border-top: 1px solid var(--border);
+  margin-top: auto;
+}
+
+/* Responsive tweaks */
+@media (max-width: 768px) {
+  .site-header {
+    padding: 0.75rem 1rem;
+  }
+
+  .nav {
+    width: 100%;
+  }
+
+  .main {
+    padding: 1rem;
+  }
+
+  .grade-form {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .card-grid {
+    grid-template-columns: 1fr;
+  }
+}
+
+

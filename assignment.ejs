@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manage Assignments - Smart Course Companion</title>
+    <link rel="stylesheet" href="assignment.css">
+</head>
+<body>
+
+    <div class="navbar">
+        <h2>Smart Course Companion</h2>
+        <div class="navbar-link">
+            <a href="/admin1">Dashboard</a>
+            <a href="admin2.html">Course Adder</a>
+            <a href="AccountDetailsIn.html">Logout</a>
+        </div>
+    </div>
+
+    <div class="main">
+
+        <div class="card">
+            <div class="cardheader">
+                <h2>Create New Assignment - <%= course %></h2>
+            </div>
+            
+            <form action="/createAssignment" method="POST" class="assignmentform">
+                    <input name="courseId" type="hidden" value="<%= course %>">
+                <div class="formgroup">
+                    <label>Title:</label>
+                    <input name="title" type="text" placeholder="e.g. Lab 4">
+                </div>
+                <div class="formgroup">
+                    <label># of Points:</label>
+                    <input name="weight" type="number" placeholder="10">
+                </div>
+                <div class="formgroup">
+                    <label>Due Date:</label>
+                    <input name="dueDate" type="date">
+                </div>
+                <button type="submit" class="btnprimary">Add Assignment</button>
+            </form>
+        </div>
+
+        <div class="card" style="margin-top: 30px;">
+            <div class="cardheader">
+                <h2>Existing Assignments</h2>
+            </div>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Assignment</th>
+                        <th>Out Of</th>
+                        <th>Due Date</th>
+                        <th>Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <% if(sample.length > 0)  {
+                    sample.forEach(function(data) {
+                    %>
+                    <tr>
+                        <td><%= data.name %></td>
+                        <td><%= data.weight %></td>
+                        <td><%= data.dueDate %></td>
+                        <td><form action="/deleteAssignment" method="POST"><input type="hidden" name="courseCode" value="course"><input type="hidden" name="assignment" value="<%= data.name %>">  <button style="background-color: darkred;" type="submit">Delete</button></form></td>
+                    </tr>
+                    <% })}; %>
+                </tbody>
+            </table>
+        </div>
+    </div>
+
+</body>
+</html>

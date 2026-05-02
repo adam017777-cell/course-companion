@@ -24,10 +24,6 @@ For fast testing, use the following MySQL database:
 
 ```bash
 npm install
-node i
-nodemon i
-express i
-express-session i
 nodemon app.js
 ```
 

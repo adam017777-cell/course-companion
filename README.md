@@ -27,4 +27,4 @@ npm install
 nodemon app.js
 ```
 
-The server will print the local URL, typically `http://localhost:3000`.
+The server will print the local URL: `http://localhost:3000`.
